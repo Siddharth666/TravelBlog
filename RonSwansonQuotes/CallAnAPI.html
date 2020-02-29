@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>Hello Siddharth</h1>
+<div id="app">
+	<h4>{{status}}</h4>
+</div>
+<script type="text/javascript">
+	let vm = new Vue({
+		el: '#app',
+		data: {
+			status: ''
+			},
+	created: function() {
+			this.loadData();
+	},
+	methods: {
+		loadData: function() {
+			this.status = 'loading...';
+			var v = this;
+			axios.get('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
+			.then(function(response) {
+				vm.status = response.data[0];
+			})
+			.catch(function(error) {
+				vm.status = 'Error Occured' + error;
+			} );
+		}
+	}
+	});
+
+</script>
+</body>
+
+
+
+</html>
